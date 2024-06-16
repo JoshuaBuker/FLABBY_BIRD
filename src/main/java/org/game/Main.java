@@ -12,7 +12,7 @@ public class Main {
       .windowDimensions(800, 600)
       .build();
 
-    SceneManager manager = new SceneManager(Constants.SCENES).setActiveScene("Main Menu");
+    SceneManager manager = new SceneManager(window, Constants.SCENES).setActiveScene("Main Menu");
     
     window.run(manager);
   }

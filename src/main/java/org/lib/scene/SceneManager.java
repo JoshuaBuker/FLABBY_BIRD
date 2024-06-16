@@ -2,14 +2,14 @@ package org.lib.scene;
 
 import java.util.*;
 
+import org.lib.window.Window;
+
 public class SceneManager {
   // ===================== INSTANCE =======================
   private Map<String, Scene> sceneMap = new HashMap<>();
   private Scene activeScene;
 
-  public SceneManager() {}
-
-  public SceneManager(Scene[] scenes) {
+  public SceneManager(Window window, Scene[] scenes) {
     loadScenes(scenes);
   }
 
