@@ -18,8 +18,6 @@ public class Bird extends DynamicComponent {
     this.setColor(ColorRGBA.YELLOW);
   }
 
-
-
   @Override
   public void applyPhysics() {
     PercentPoint temp = getPercentLocation();
