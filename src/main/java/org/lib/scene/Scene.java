@@ -13,7 +13,6 @@ public abstract class Scene {
 
   public Scene(String sceneName) {
     this.sceneName = sceneName;
-    SceneManager.getInstance().registerScene(this);
   }
 
   public void addStatic(StaticComponent comp) {

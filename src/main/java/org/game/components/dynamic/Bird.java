@@ -6,14 +6,17 @@ import org.lib.draw.Quad;
 import org.lib.listener.KeyListener;
 import org.lib.positioning.PercentDimension;
 import org.lib.positioning.PercentPoint;
+import org.lib.positioning.PixelDimension;
 import org.lib.scene.SceneManager;
+import org.lib.util.Util;
+import org.lib.window.Window;
 import org.lwjgl.glfw.GLFW;
 
 public class Bird extends DynamicComponent {
   private boolean previousButtonState = false;
 
   public Bird() {
-    this.setDimensions(new PercentDimension(0.05f, 0.05f));
+    this.setDimensions(new PixelDimension(50, 50));
     this.setLocation(new PercentPoint(-0.5f, 0.0f));
     this.setColor(ColorRGBA.YELLOW);
   }
@@ -28,7 +31,7 @@ public class Bird extends DynamicComponent {
 
     this.previousButtonState = KeyListener.isKeyPressed(GLFW.GLFW_KEY_SPACE);
     
-    if (temp.getY() - (getPercentDimension().getHeight() / 2.0f) >= -1.0f) {
+    if (temp.getY() - (Util.pixelToPercentDimension(Window.getSize(), getPixelDimension()).getHeight() / 2.0f) >= -1.0f) {
       temp.setY(temp.getY() + (getGRAVITY() * -0.0005f));
       this.setLocation(temp);
     } 
@@ -36,6 +39,6 @@ public class Bird extends DynamicComponent {
 
   @Override
   public void draw() {
-    Quad.drawQuad(getPercentDimension(), getPercentLocation(), getColor());
+    Quad.drawQuad(Util.pixelToPercentDimension(Window.getSize(), getPixelDimension()), getPercentLocation(), getColor());
   }
 }

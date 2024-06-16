@@ -36,6 +36,8 @@ public class Window {
   
     private String title = "New Window";
 
+    private SceneManager manager = new SceneManager();
+
     public Builder centered(boolean centered) { 
       this.centered = centered;
       return this;
@@ -58,6 +60,11 @@ public class Window {
     }
     public Builder borderless(boolean borderless) { 
       this.borderless = borderless;
+      return this;
+    }
+
+    public Builder setSceneManager(SceneManager manager) { 
+      this.manager = manager;
       return this;
     }
   
@@ -95,7 +102,7 @@ public class Window {
         centered, resizable, 
         visible, maximized,
         backgroundColor, windowDimensions, 
-        title, borderless
+        title, borderless, manager
       );
     }
   }
@@ -105,9 +112,10 @@ public class Window {
   private static PixelDimension windowDimensions;
   private String title;
   private long window;
+  private SceneManager manager;
 
   public Window(boolean centered, boolean resizable, boolean visible, boolean maximized,
-      ColorRGBA backgroundColor, PixelDimension windowDimensions, String title, boolean borderless) {
+      ColorRGBA backgroundColor, PixelDimension windowDimensions, String title, boolean borderless, SceneManager manager) {
     this.centered = centered;
     this.resizable = resizable;
     this.visible = visible;
@@ -116,6 +124,7 @@ public class Window {
     Window.windowDimensions = windowDimensions;
     this.title = title;
     this.borderless = borderless;
+    this.manager = manager;
   }
 
   private static void windowSizeCallback(long window, int width, int height) {
@@ -177,7 +186,7 @@ public class Window {
 		while (!GLFW.glfwWindowShouldClose(window)) {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT); 
 
-      SceneManager.getInstance().displaySceneFrame();
+      this.manager.displaySceneFrame();
 
 			GLFW.glfwSwapBuffers(window); 
 			GLFW.glfwPollEvents();
