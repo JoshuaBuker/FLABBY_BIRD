@@ -75,6 +75,14 @@ public class Window {
       this.backgroundColor.setAlpha(alpha);
       return this;
     }
+
+    public Builder backgroundColor(ColorRGBA color) { 
+      this.backgroundColor.setRed(color.getRed255());
+      this.backgroundColor.setGreen(color.getGreen255());
+      this.backgroundColor.setBlue(color.getBlue255());
+      this.backgroundColor.setAlpha(color.getAlpha());
+      return this;
+    }
   
     public Builder windowDimensions(int width, int height) { 
       this.windowDimensions.setWidth(width);
@@ -110,6 +118,11 @@ public class Window {
     this.borderless = borderless;
   }
 
+  private static void windowSizeCallback(long window, int width, int height) {
+    Window.windowDimensions.setWidth(width);
+    Window.windowDimensions.setHeight(height);
+  }
+
   private void init() {
 		GLFWErrorCallback.createPrint(System.err).set();
 
@@ -141,10 +154,11 @@ public class Window {
       }
 		} 
 
-    glfwSetCursorPosCallback(window, MouseListener::mousePosCallback);
-    glfwSetMouseButtonCallback(window, MouseListener::mouseButtonCallback);
-    glfwSetScrollCallback(window, MouseListener::mouseScrollCallback);
-    glfwSetKeyCallback(window, KeyListener::KeyCallback);
+    GLFW.glfwSetCursorPosCallback(window, MouseListener::mousePosCallback);
+    GLFW.glfwSetMouseButtonCallback(window, MouseListener::mouseButtonCallback);
+    GLFW.glfwSetScrollCallback(window, MouseListener::mouseScrollCallback);
+    GLFW.glfwSetKeyCallback(window, KeyListener::KeyCallback);
+    GLFW.glfwSetWindowSizeCallback(window, Window::windowSizeCallback);
 
 		GLFW.glfwMakeContextCurrent(window);
     GLFW.glfwSwapInterval(1); 

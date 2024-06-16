@@ -25,6 +25,9 @@ public class SceneManager {
   public void setActiveScene(String sceneName) {
     this.activeScene = sceneMap.get(sceneName);
   }
+  public void setActiveScene(Scene scene) {
+    this.activeScene = sceneMap.get(scene.getName());
+  }
 
   public void displaySceneFrame() {
     activeScene.drawFrame();
