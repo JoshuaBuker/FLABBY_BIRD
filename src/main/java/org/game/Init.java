@@ -1,18 +1,16 @@
 package org.game;
 
 import org.game.scenes.MainMenu;
+import org.lib.init.InitBase;
 
-public class Init {
-  // ====================== SCENES =========================
-  public static final MainMenu mainMenu = new MainMenu("Main Menu");
+public class Init extends InitBase{
+  public static void load() {
 
-
-  // ==================== SINGLETON-ish ========================
-  private static Init instance;
-
-  public static synchronized void load() {
-    if (Init.instance == null) {
-      Init.instance = new Init();
-    }
+    add(new MainMenu("Main Menu"));
+    // add(new MainMenu("GamePlayScene")); // Example
+    // add(new MainMenu("Pause Menu"));    // Example
+    // add(new MainMenu("GameLostScene")); // Example
   }
+
+
 }
