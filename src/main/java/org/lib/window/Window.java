@@ -3,11 +3,6 @@ package org.lib.window;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
-import static org.lwjgl.glfw.GLFW.glfwSetCursorPosCallback;
-import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
-import static org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback;
-import static org.lwjgl.glfw.GLFW.glfwSetScrollCallback;
-
 import java.nio.IntBuffer;
 
 import org.lib.color.ColorRGBA;
