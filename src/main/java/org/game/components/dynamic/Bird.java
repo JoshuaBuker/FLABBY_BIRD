@@ -6,8 +6,6 @@ import org.lib.draw.Quad;
 import org.lib.listener.KeyListener;
 import org.lib.positioning.PercentPoint;
 import org.lib.positioning.PixelDimension;
-import org.lib.util.Util;
-import org.lib.window.Window;
 import org.lwjgl.glfw.GLFW;
 
 public class Bird extends DynamicComponent {
@@ -24,19 +22,19 @@ public class Bird extends DynamicComponent {
     PercentPoint temp = getPercentLocation();
 
     if(KeyListener.isKeyPressed(GLFW.GLFW_KEY_SPACE) && KeyListener.isKeyPressed(GLFW.GLFW_KEY_SPACE) != previousButtonState) {
-      temp.setY(temp.getY() + 0.2f);
+      temp.setY(temp.getY() + 0.3f);
     }      
 
     this.previousButtonState = KeyListener.isKeyPressed(GLFW.GLFW_KEY_SPACE);
     
-    if (temp.getY() - (Util.pixelToPercentDimension(Window.getSize(), getPixelDimension()).getHeight() / 2.0f) >= -1.0f) {
-      temp.setY(temp.getY() + (getGRAVITY() * -0.0005f));
+    if (temp.getY() - (getPercentDimension().getHeight() / 2.0f) >= -1.0f) {
+      temp.setY(temp.getY() + (getGRAVITY() * -0.001f));
       this.setLocation(temp);
     } 
   } 
 
   @Override
   public void draw() {
-    Quad.drawQuad(Util.pixelToPercentDimension(Window.getSize(), getPixelDimension()), getPercentLocation(), getColor());
+    Quad.drawQuad(getPercentDimension(), getPercentLocation(), getColor());
   }
 }

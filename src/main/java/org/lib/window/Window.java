@@ -31,8 +31,6 @@ public class Window {
   
     private String title = "New Window";
 
-    private SceneManager manager = new SceneManager();
-
     public Builder centered(boolean centered) { 
       this.centered = centered;
       return this;
@@ -55,11 +53,6 @@ public class Window {
     }
     public Builder borderless(boolean borderless) { 
       this.borderless = borderless;
-      return this;
-    }
-
-    public Builder setSceneManager(SceneManager manager) { 
-      this.manager = manager;
       return this;
     }
   
@@ -97,7 +90,7 @@ public class Window {
         centered, resizable, 
         visible, maximized,
         backgroundColor, windowDimensions, 
-        title, borderless, manager
+        title, borderless
       );
     }
   }
@@ -110,7 +103,7 @@ public class Window {
   private SceneManager manager;
 
   public Window(boolean centered, boolean resizable, boolean visible, boolean maximized,
-      ColorRGBA backgroundColor, PixelDimension windowDimensions, String title, boolean borderless, SceneManager manager) {
+      ColorRGBA backgroundColor, PixelDimension windowDimensions, String title, boolean borderless) {
     this.centered = centered;
     this.resizable = resizable;
     this.visible = visible;
@@ -119,7 +112,6 @@ public class Window {
     Window.windowDimensions = windowDimensions;
     this.title = title;
     this.borderless = borderless;
-    this.manager = manager;
   }
 
   private static void windowSizeCallback(long window, int width, int height) {
@@ -188,7 +180,12 @@ public class Window {
 		}
 	}
 
-	public void run() {
+  public void setSceneManager(SceneManager manager) {
+    this.manager = manager;
+  }
+
+	public void run(SceneManager manager) {
+    setSceneManager(manager);
 		init();
 		loop();
 
