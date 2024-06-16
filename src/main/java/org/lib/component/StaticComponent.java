@@ -1,5 +1,6 @@
 package org.lib.component;
 
+import org.lib.color.ColorRGBA;
 import org.lib.positioning.PercentDimension;
 import org.lib.positioning.PercentPoint;
 import org.lib.positioning.PixelDimension;
@@ -10,6 +11,7 @@ public abstract class StaticComponent {
   private PercentDimension percentDim;
   private PercentPoint percentLocation;
   private PixelPoint pixelLocation;
+  private ColorRGBA color;
 
   private float scale = 1.0f;
 
@@ -18,12 +20,14 @@ public abstract class StaticComponent {
   public PercentPoint getPercentLocation() { return this.percentLocation; }
   public PixelPoint getPixelLocation() { return this.pixelLocation; }
   public float getScale() { return this.scale; }
+  public ColorRGBA getColor() { return this.color; }
 
   public void setDimensions(PixelDimension pixelDim) { this.pixelDim = pixelDim; }
   public void setDimensions(PercentDimension percentDim) { this.percentDim = percentDim; }
   public void setScale(float scale) { this.scale = scale; }
   public void setLocation(PixelPoint point) { this.pixelLocation = point; }
   public void setLocation(PercentPoint point) { this.percentLocation = point; }
+  public void setColor(ColorRGBA color) { this.color = color; }
 
   public void draw() {}
 

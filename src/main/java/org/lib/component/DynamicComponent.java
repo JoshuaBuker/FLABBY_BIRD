@@ -10,7 +10,7 @@ public abstract class DynamicComponent extends StaticComponent {
   public void setGRAVITY(float gRAVITY) { GRAVITY = gRAVITY; }
   public void setMass(float mass) { this.mass = mass; }
 
-  private void applyPhysics() {}
+  public void applyPhysics() {}
 
   public void run() {
     applyPhysics();

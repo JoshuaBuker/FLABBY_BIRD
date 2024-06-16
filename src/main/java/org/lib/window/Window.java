@@ -123,6 +123,10 @@ public class Window {
     Window.windowDimensions.setHeight(height);
   }
 
+  public static PixelDimension getSize() {
+    return windowDimensions;
+  }
+
   private void init() {
 		GLFWErrorCallback.createPrint(System.err).set();
 

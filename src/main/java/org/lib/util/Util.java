@@ -17,8 +17,8 @@ public class Util {
 
   public static PercentDimension pixelToPercentDimension(PixelDimension window, PixelDimension dim) {
     return new PercentDimension(
-      (float)window.getWidth() / dim.getWidth(),
-      (float)window.getHeight() / dim.getHeight()
+      (float)(dim.getWidth() / window.getWidth()),
+      (float)(dim.getHeight() / window.getHeight())
     );
   }
 }
