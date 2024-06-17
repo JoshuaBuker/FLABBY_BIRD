@@ -7,7 +7,7 @@ import org.lib.window.Window;
 public class SceneManager {
   // ===================== INSTANCE =======================
   private Map<String, Scene> sceneMap = new HashMap<>();
-  private Scene activeScene;
+  private Scene activeScene = new Scene("Placeholder") {};
 
   public SceneManager(Window window, Scene[] scenes) {
     loadScenes(scenes);
