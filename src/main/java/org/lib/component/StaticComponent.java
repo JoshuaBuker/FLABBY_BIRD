@@ -1,6 +1,7 @@
 package org.lib.component;
 
 import org.lib.color.ColorRGBA;
+import org.lib.positioning.Edges;
 import org.lib.positioning.PercentDimension;
 import org.lib.positioning.PercentPoint;
 import org.lib.positioning.PixelDimension;
@@ -14,6 +15,7 @@ public abstract class StaticComponent {
   private PercentPoint percentLocation;
   private PixelPoint pixelLocation;
   private ColorRGBA color;
+  private Edges edges;
 
   private float scale = 1.0f;
 
@@ -24,11 +26,13 @@ public abstract class StaticComponent {
   public PercentDimension getPercentDimension() { return this.percentDim; }
   public PercentPoint getPercentLocation() { return this.percentLocation; }
   public PixelPoint getPixelLocation() { return this.pixelLocation; }
+  public Edges getEdges() { return this.edges; }
 
 
 //====================== SETTERS ==================================
   public void setScale(float scale) { this.scale = scale; }
   public void setColor(ColorRGBA color) { this.color = color; }
+  public void setEdges(Edges edges) { this.edges = edges; }
 
   public void setDimensions(PixelDimension pixelDim) { 
     this.pixelDim = pixelDim; 
@@ -50,6 +54,15 @@ public abstract class StaticComponent {
     this.pixelLocation = Util.percentToPixelPoint(Window.getSize(), point);
   }
 
+  public void generateEdges(StaticComponent comp) {
+    if(this.percentDim != null && this.percentLocation != null) {
+      if(this.edges != null) {
+        this.edges.update(comp);
+      } else {
+        this.edges = new Edges(comp);
+      }
+    }
+  }
 
 
   public void draw() {}

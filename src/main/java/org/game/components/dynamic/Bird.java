@@ -15,6 +15,8 @@ public class Bird extends DynamicComponent {
     this.setDimensions(new PixelDimension(50, 50));
     this.setLocation(new PercentPoint(-0.5f, 0.0f));
     this.setColor(ColorRGBA.YELLOW);
+
+    this.generateEdges(this);
   }
 
   @Override
@@ -30,6 +32,7 @@ public class Bird extends DynamicComponent {
     if (temp.getY() - (getPercentDimension().getHeight() / 2.0f) >= -1.0f) {
       temp.setY(temp.getY() + (getGRAVITY() * -0.001f));
       this.setLocation(temp);
+      this.generateEdges(this);
     } 
   } 
 
