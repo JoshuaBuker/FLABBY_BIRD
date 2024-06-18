@@ -11,7 +11,7 @@ public class MainMenu extends Scene {
   public MainMenu(String sceneName) {
     super(sceneName);
 
-    addDynamic(new Bird());
-    addDynamic(new PipeLoop());
+    addDynamic(new Bird(), "Bird");
+    addDynamic(new PipeLoop(), "PipeLoop");
   }
 }

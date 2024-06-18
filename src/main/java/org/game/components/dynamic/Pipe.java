@@ -23,7 +23,13 @@ public class Pipe extends DynamicComponent {
 
   @Override
   public void applyPhysics() {
-    
+    if (temp.getX() - (getPercentDimension().getWidth() / 2.0f) >= -1.0f) {
+      temp.setX(temp.getX() + (getGravity() * -0.0008f));
+      
+    } else {
+      temp.setX(1.0f);
+    }
+    this.setLocation(temp);
   }
 
   @Override

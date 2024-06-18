@@ -3,11 +3,6 @@ package org.lib.window;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.system.MemoryUtil;
 
-import static org.lwjgl.glfw.GLFW.glfwSetCursorPosCallback;
-import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
-import static org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback;
-import static org.lwjgl.glfw.GLFW.glfwSetScrollCallback;
-
 import java.nio.IntBuffer;
 
 import org.lib.color.ColorRGBA;
@@ -105,6 +100,7 @@ public class Window {
   private static PixelDimension windowDimensions;
   private String title;
   private long window;
+  private SceneManager manager;
 
   public Window(boolean centered, boolean resizable, boolean visible, boolean maximized,
       ColorRGBA backgroundColor, PixelDimension windowDimensions, String title, boolean borderless) {
@@ -177,14 +173,19 @@ public class Window {
 		while (!GLFW.glfwWindowShouldClose(window)) {
 			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT); 
 
-      SceneManager.getInstance().displaySceneFrame();
+      this.manager.displaySceneFrame();
 
 			GLFW.glfwSwapBuffers(window); 
 			GLFW.glfwPollEvents();
 		}
 	}
 
-	public void run() {
+  public void setSceneManager(SceneManager manager) {
+    this.manager = manager;
+  }
+
+	public void run(SceneManager manager) {
+    setSceneManager(manager);
 		init();
 		loop();
 
