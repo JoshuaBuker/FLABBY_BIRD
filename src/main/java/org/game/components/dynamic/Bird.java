@@ -11,27 +11,37 @@ import org.lwjgl.glfw.GLFW;
 
 public class Bird extends DynamicComponent {
   private boolean previousButtonState = false;
+  //temporarily constant in the future when the player gets fast enough their jump height will increase or decrease to make the game harder
+  private final float JUMP_HEIGHT = 0.028f;
 
+   
   public Bird() {
     this.setDimensions(new PercentDimension(0.05f, 0.05f));
     this.setLocation(new PercentPoint(-0.5f, 0.0f));
     this.setColor(ColorRGBA.YELLOW);
+    this.setGRAVITY(-0.0025f);
   }
-
+  public static float height = 0.05f;
   @Override
   public void applyPhysics() {
-    PercentPoint temp = getPercentLocation();
+    PercentPoint birdPos = getPercentLocation();
+    float birdY = birdPos.getY();
+
+     if (birdPos.getY() - (getPercentDimension().getHeight()) >= -1.0f) {
+        setYVelocity(getYVelocity() + getGRAVITY());
+      }
 
     if(KeyListener.isKeyPressed(GLFW.GLFW_KEY_SPACE) && KeyListener.isKeyPressed(GLFW.GLFW_KEY_SPACE) != previousButtonState) {
-      temp.setY(temp.getY() + 0.2f);
+      setYVelocity(JUMP_HEIGHT);
     }      
 
     this.previousButtonState = KeyListener.isKeyPressed(GLFW.GLFW_KEY_SPACE);
-    
-    if (temp.getY() - (getPercentDimension().getHeight() / 2.0f) >= -1.0f) {
-      temp.setY(temp.getY() + (getGRAVITY() * -0.0005f));
-      this.setLocation(temp);
-    } 
+   
+    birdY += getYVelocity();
+
+    birdPos.setY(birdY);
+
+    this.setLocation(birdPos);
   } 
 
   @Override

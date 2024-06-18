@@ -22,12 +22,30 @@ public abstract class StaticComponent {
   public float getScale() { return this.scale; }
   public ColorRGBA getColor() { return this.color; }
 
+  public float getHeight(){
+    return this.getPercentDimension().getHeight();
+  }
+  public float getWidth(){
+    return this.getPercentDimension().getWidth();
+  }
+
+  public float getXTopLeft(){
+    return getPercentLocation().getX() - (getPercentDimension().getWidth() / 2.0f);
+  }
+  public float getXTopRight(){
+    return getPercentLocation().getX() + (getPercentDimension().getWidth() / 2.0f);
+  }
+  public float getYTopLeft(){  
+      return getPercentLocation().getY() + (getPercentDimension().getHeight() / 2);
+  }
   public void setDimensions(PixelDimension pixelDim) { this.pixelDim = pixelDim; }
   public void setDimensions(PercentDimension percentDim) { this.percentDim = percentDim; }
   public void setScale(float scale) { this.scale = scale; }
   public void setLocation(PixelPoint point) { this.pixelLocation = point; }
   public void setLocation(PercentPoint point) { this.percentLocation = point; }
   public void setColor(ColorRGBA color) { this.color = color; }
+
+  
 
   public void draw() {}
 

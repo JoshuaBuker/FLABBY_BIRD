@@ -1,6 +1,7 @@
 package org.lib.draw;
 
 import org.lib.color.ColorRGBA;
+import org.lib.component.StaticComponent;
 import org.lib.positioning.PercentDimension;
 import org.lib.positioning.PercentPoint;
 import org.lib.positioning.PixelDimension;
@@ -49,5 +50,7 @@ public class Quad {
       color
     );
   }
-
+  public static void drawQuad(StaticComponent thing) {
+    drawQuad(thing.getPercentDimension(), thing.getPercentLocation(), thing.getColor());
+  }
 }
