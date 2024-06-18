@@ -1,7 +1,6 @@
 package org.lib.component;
 
 import org.lib.color.ColorRGBA;
-import org.lib.positioning.Edges;
 import org.lib.positioning.PercentDimension;
 import org.lib.positioning.PercentPoint;
 import org.lib.positioning.PixelDimension;
@@ -10,60 +9,39 @@ import org.lib.util.Util;
 import org.lib.window.Window;
 
 public abstract class StaticComponent {
-  private PixelDimension pixelDim;
-  private PercentDimension percentDim;
-  private PercentPoint percentLocation;
-  private PixelPoint pixelLocation;
+  private PixelDimension dim;
+  private PixelPoint pos;
   private ColorRGBA color;
-  private Edges edges;
 
   private float scale = 1.0f;
 
 //========================== GETTERS ===============================
   public float getScale() { return this.scale; }
   public ColorRGBA getColor() { return this.color; }
-  public PixelDimension getPixelDimension() { return this.pixelDim; }
-  public PercentDimension getPercentDimension() { return this.percentDim; }
-  public PercentPoint getPercentLocation() { return this.percentLocation; }
-  public PixelPoint getPixelLocation() { return this.pixelLocation; }
-  public Edges getEdges() { return this.edges; }
+  public PixelDimension getPixelDimension() { return this.dim; }
+  public PixelPoint getPixelLocation() { return this.pos; }
 
+  public PercentDimension getPercentDimension() { 
+    return Util.pixelToPercentDimension(Window.getSize(), dim);
+  }
+
+  public PercentPoint getPercentLocation() { 
+    return Util.pixelToPercentPoint(Window.getSize(), pos);
+  }
 
 //====================== SETTERS ==================================
   public void setScale(float scale) { this.scale = scale; }
   public void setColor(ColorRGBA color) { this.color = color; }
-  public void setEdges(Edges edges) { this.edges = edges; }
-
-  public void setDimensions(PixelDimension pixelDim) { 
-    this.pixelDim = pixelDim; 
-    this.percentDim = Util.pixelToPercentDimension(Window.getSize(), pixelDim);
-  }
+  public void setDimensions(PixelDimension pixelDim) { this.dim = pixelDim; }
+  public void setLocation(PixelPoint point) { this.pos = point; }
 
   public void setDimensions(PercentDimension percentDim) { 
-    this.percentDim = percentDim; 
-    this.pixelDim = Util.percentToPixelDimension(Window.getSize(), percentDim);
-  }
-
-  public void setLocation(PixelPoint point) { 
-    this.pixelLocation = point; 
-    this.percentLocation = Util.pixelToPercentPoint(Window.getSize(), point);
+    this.dim = Util.percentToPixelDimension(Window.getSize(), percentDim);
   }
 
   public void setLocation(PercentPoint point) { 
-    this.percentLocation = point; 
-    this.pixelLocation = Util.percentToPixelPoint(Window.getSize(), point);
+    this.pos = Util.percentToPixelPoint(Window.getSize(), point);
   }
-
-  public void generateEdges(StaticComponent comp) {
-    if(this.percentDim != null && this.percentLocation != null) {
-      if(this.edges != null) {
-        this.edges.update(comp);
-      } else {
-        this.edges = new Edges(comp);
-      }
-    }
-  }
-
 
   public void draw() {}
 

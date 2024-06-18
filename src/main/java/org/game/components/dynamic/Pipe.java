@@ -18,7 +18,7 @@ public class Pipe extends DynamicComponent {
     PercentPoint temp = getPercentLocation();
     
     if (temp.getX() - (getPercentDimension().getWidth() / 2.0f) >= -1.0f) {
-      temp.setX(temp.getX() + (getGRAVITY() * -0.0008f));
+      temp.setX(temp.getX() + (getGravity() * -0.0008f));
       
     } else {
       temp.setX(1.0f);
