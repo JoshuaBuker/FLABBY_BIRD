@@ -9,9 +9,9 @@ import org.lib.util.Util;
 import org.lib.window.Window;
 
 public abstract class StaticComponent {
-  private PixelDimension dim;
-  private PixelPoint pos;
-  private ColorRGBA color;
+  private PixelDimension dim = new PixelDimension(0, 0);
+  private PixelPoint pos = new PixelPoint(0, 0);
+  private ColorRGBA color = ColorRGBA.RED;
 
   private float scale = 1.0f;
 

@@ -1,6 +1,7 @@
 package org.lib.draw;
 
 import org.lib.color.ColorRGBA;
+import org.lib.component.StaticComponent;
 import org.lib.positioning.PercentDimension;
 import org.lib.positioning.PercentPoint;
 import org.lib.positioning.PixelDimension;
@@ -11,6 +12,26 @@ import org.lwjgl.opengl.GL11;
 public class Quad {
   
   public static void drawQuad(PercentDimension dim, PercentPoint pos, ColorRGBA color) {
+    GL11.glPushMatrix();
+      GL11.glTranslatef(pos.getX(), pos.getY(), 0);
+      GL11.glRotatef(0, 0, 0, 1);
+    
+      GL11.glBegin(GL11.GL_QUADS);
+        GL11.glColor4f(color.getRed1f(), color.getGreen1f(), color.getBlue1f(), color.getAlpha());
+        GL11.glVertex2f(-dim.getWidth(), -dim.getHeight());
+        GL11.glVertex2f(dim.getWidth(), -dim.getHeight());
+        GL11.glVertex2f(dim.getWidth(), dim.getHeight());
+        GL11.glVertex2f(-dim.getWidth(), dim.getHeight());
+      GL11.glEnd();
+
+    GL11.glPopMatrix();
+  }
+
+  public static void drawQuad(StaticComponent comp) {
+    PercentDimension dim = comp.getPercentDimension();
+    PercentPoint pos = comp.getPercentLocation();
+    ColorRGBA color = comp.getColor();
+
     GL11.glPushMatrix();
       GL11.glTranslatef(pos.getX(), pos.getY(), 0);
       GL11.glRotatef(0, 0, 0, 1);
