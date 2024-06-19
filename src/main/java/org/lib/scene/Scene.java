@@ -7,6 +7,7 @@ import org.lib.component.StaticComponent;
 
 public abstract class Scene {
   private String sceneName;
+  private boolean pause = false;
 
   private final Map<String, DynamicComponent> DYNAMIC_COMPONENTS = new HashMap<>();
   private final Map<String, StaticComponent> STATIC_COMPONENTS = new HashMap<>();
@@ -20,7 +21,7 @@ public abstract class Scene {
   }
 
   public void addDynamic(DynamicComponent comp, String id) {
-    this.STATIC_COMPONENTS.put(id, comp);
+    this.DYNAMIC_COMPONENTS.put(id, comp);
   }
 
   public void addStatic(StaticComponent comp) {
@@ -28,7 +29,22 @@ public abstract class Scene {
   }
 
   public void addDynamic(DynamicComponent comp) {
-    this.STATIC_COMPONENTS.put(String.valueOf(DYNAMIC_COMPONENTS.size()), comp);
+    this.DYNAMIC_COMPONENTS.put(String.valueOf(DYNAMIC_COMPONENTS.size()), comp);
+  }
+
+  public Map<String, DynamicComponent> getDynamicMap() {
+    return this.DYNAMIC_COMPONENTS;
+  }
+
+  public Map<String, StaticComponent> getStaticMap() {
+    return this.STATIC_COMPONENTS;
+  }
+
+  public void pause() {
+    this.pause = true;
+  }
+  public void resume() {
+    this.pause = false;
   }
   
   public String getName() { return this.sceneName; }
@@ -37,15 +53,19 @@ public abstract class Scene {
   protected void applyEvents() {}
 
   public void drawFrame() {
-    for(StaticComponent comp : this.STATIC_COMPONENTS.values()) {
-      comp.run();
-    }
-
-    applyEvents();
-    applyPhysicsAndCollisions();
-
-    for(DynamicComponent comp : this.DYNAMIC_COMPONENTS.values()) {
-      comp.run();
+    if (!false) {
+      for(Map.Entry<String, StaticComponent> entry : this.STATIC_COMPONENTS.entrySet()) {
+        // System.out.println(entry.getKey());
+        entry.getValue().run();
+      }
+  
+      applyEvents();
+      applyPhysicsAndCollisions();
+  
+      for(Map.Entry<String, DynamicComponent> entry : this.DYNAMIC_COMPONENTS.entrySet()) {
+        // System.out.println(entry.getKey());
+        entry.getValue().run();
+      }
     }
   }
 }

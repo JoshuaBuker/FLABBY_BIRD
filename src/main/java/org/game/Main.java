@@ -10,6 +10,7 @@ public class Main {
       .title("Flabby Bird")
       .backgroundColor(ColorRGBA.CYAN)
       .windowDimensions(800, 600)
+      .resizable(false)
       .build();
 
     SceneManager manager = new SceneManager(window, Constants.SCENES)
