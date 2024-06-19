@@ -4,8 +4,9 @@ import org.lib.color.ColorRGBA;
 import org.lib.component.DynamicComponent;
 import org.lib.draw.Quad;
 import org.lib.listener.KeyListener;
+import org.lib.positioning.PercentDimension;
 import org.lib.positioning.PercentPoint;
-import org.lib.positioning.PixelDimension;
+import org.lib.scene.SceneManager;
 import org.lwjgl.glfw.GLFW;
 
 public class Bird extends DynamicComponent {
@@ -15,7 +16,7 @@ public class Bird extends DynamicComponent {
 
    
   public Bird() {
-    this.setDimensions(new PixelDimension(50, 50));
+    this.setDimensions(new PercentDimension(0.05f, 0.05f));
     this.setLocation(new PercentPoint(-0.5f, 0.0f));
     this.setColor(ColorRGBA.YELLOW);
     this.setGRAVITY(-0.0025f);
@@ -27,7 +28,7 @@ public class Bird extends DynamicComponent {
     float birdY = birdPos.getY();
 
      if (birdPos.getY() - (getPercentDimension().getHeight()) >= -1.0f) {
-        setYVelocity(getYVelocity() + getGravity());
+        setYVelocity(getYVelocity() + getGRAVITY());
       }
 
     if(KeyListener.isKeyPressed(GLFW.GLFW_KEY_SPACE) && KeyListener.isKeyPressed(GLFW.GLFW_KEY_SPACE) != previousButtonState) {

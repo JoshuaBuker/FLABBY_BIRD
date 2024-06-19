@@ -18,12 +18,14 @@ public abstract class DynamicComponent extends StaticComponent {
   public void setYVelocity (float yVal){VELOCITY_Y = yVal;}
   public void setSpeed(float speedVal) { SPEED = speedVal;}
 
-  public float getGravity() { return GRAVITY; }
+  public float getGRAVITY() { return GRAVITY; }
   public float getMass() { return mass; }
+
+  public void setGRAVITY(float gRAVITY) { GRAVITY = gRAVITY; }
+  public void setMass(float mass) { this.mass = mass; }
 
   public void applyPhysics() {}
 
-  @Override
   public void run() {
     applyPhysics();
     draw();

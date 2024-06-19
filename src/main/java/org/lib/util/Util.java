@@ -12,18 +12,13 @@ public class Util {
   }
 
   public static PercentPoint pixelToPercentPoint(PixelDimension window, PixelPoint pixel) {
-    return new PercentPoint((float)pixel.getX() / window.getWidth(), (float)pixel.getY() / window.getHeight());
+    return new PercentPoint((float)window.getWidth() / pixel.getX(), (float)window.getHeight() / pixel.getY());
   }
 
   public static PercentDimension pixelToPercentDimension(PixelDimension window, PixelDimension dim) {
-    return new PercentDimension((float)dim.getWidth() / window.getWidth(), (float)dim.getHeight() / window.getHeight());
-  }
-
-  public static PixelPoint percentToPixelPoint(PixelDimension window, PercentPoint pixel) {
-    return new PixelPoint((short)pixel.getX() * window.getWidth(), (short)pixel.getY() * window.getHeight());
-  }
-
-  public static PixelDimension percentToPixelDimension(PixelDimension window, PercentDimension dim) {
-    return new PixelDimension((short)dim.getWidth() * window.getWidth(), (short)dim.getHeight() * window.getHeight());
+    return new PercentDimension(
+      (float)(dim.getWidth() / window.getWidth()),
+      (float)(dim.getHeight() / window.getHeight())
+    );
   }
 }
