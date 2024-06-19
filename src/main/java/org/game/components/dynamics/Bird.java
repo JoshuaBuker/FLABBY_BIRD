@@ -11,20 +11,31 @@ import org.lwjgl.glfw.GLFW;
 
 public class Bird extends DynamicComponent {
   private boolean previousButtonState = false;
+  private final float JUMP_HEIGHT = 0.1f;
 
   public Bird() {
-    this.setDimensions(new PercentDimension(0.05f, 0.05f));
-    this.setLocation(new PercentPoint(0.0f, 0.0f));
+    this.setDimensions(new PixelDimension(50, 50));
+    this.setLocation(new PercentPoint(-0.5f, 0.0f));
     this.setColor(ColorRGBA.YELLOW);
   }
 
   @Override
   public void applyPhysics() {
-    PercentPoint temp = this.getPercentLocation();
-    temp.setY(temp.getY() + 0.0001f);
-
-    this.setLocation(temp);
   } 
+
+  
+
+  public boolean isPreviousButtonState() {
+    return previousButtonState;
+  }
+
+  public float getJUMP_HEIGHT() {
+    return JUMP_HEIGHT;
+  }
+
+  public void setPreviousButtonState(boolean pressed) {
+    this.previousButtonState = pressed;
+  }
 
   @Override
   public void draw() {
